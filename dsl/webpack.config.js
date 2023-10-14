@@ -47,17 +47,7 @@ module.exports = (_, argv) => ({
       exposes: {
         "./Button": "./src/Button"
       },
-      shared: {
-        ...deps,
-        react: {
-          singleton: true,
-          requiredVersion: deps.react,
-        },
-        "react-dom": {
-          singleton: true,
-          requiredVersion: deps["react-dom"],
-        },
-      },
+      shared: ["styled-components", {react:{singleton:true}, "react-dom":{singleton:true}}],
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
