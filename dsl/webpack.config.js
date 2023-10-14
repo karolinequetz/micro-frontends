@@ -45,7 +45,8 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./Button": "./src/Button"
+        "./Button": "./src/Button",
+        "./ButtonFallback": "./src/ButtonFallback"
       },
       shared: ["styled-components", {react:{singleton:true}, "react-dom":{singleton:true}}],
     }),

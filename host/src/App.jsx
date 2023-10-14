@@ -1,26 +1,20 @@
-import React, { useState } from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import {System} from "./utils/loadComponents"
+
 import "./index.scss";
+import { Page } from "./Main";
+import ErrorBoundary from "./Error";
 
+const RemoteButton = React.lazy(() => import("dsl/Button"));
 const App = () => {
-  const [system, setSystem] = useState(undefined);
-
   return (
-    <div className="mt-10 text-3xl mx-auto max-w-6xl">
-      <button
-        onClick=
-        {() => {
-          setSystem({
-            url: "http://localhost:8081/remoteEntry.js",
-            scope: "dsl",
-            module: "./Button",
-          });
-        }}>
-          Carregar modulo
-      </button>
-      <System system={system} />
-    </div>
+    <Page>
+      <Suspense fallback="Loading...">
+        <ErrorBoundary>
+          <RemoteButton />
+        </ErrorBoundary>
+      </Suspense>
+    </Page>
   );
 };
 ReactDOM.render(<App />, document.getElementById("app"));
